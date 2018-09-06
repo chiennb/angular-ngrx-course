@@ -49,7 +49,6 @@ export class LoginComponent implements OnInit {
         noop,
         () => alert('Login faild')
       );
-    // this.store.dispatch(new Login());
   }
 
 
