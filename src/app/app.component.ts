@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { select, Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { Logout } from './auth/auth.actions';
-import { AppState } from './reducers';
-import { map } from 'rxjs/operators';
-import { isLoggedIn, IsLoggedOut } from './auth/auth.seletors';
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {select, Store} from "@ngrx/store";
+import {Observable} from "rxjs";
+import {AppState} from './reducers';
+import {Logout} from './auth/auth.actions';
+import {map} from 'rxjs/operators';
+import {isLoggedIn, isLoggedOut} from './auth/auth.selectors';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -14,26 +14,34 @@ import { Router } from '@angular/router';
 })
 export class AppComponent implements OnInit {
 
- isLoggedIn$: Observable<boolean>;
- isLoggedOut$: Observable<boolean>;
+    isLoggedIn$: Observable<boolean>;
 
-  constructor(private store: Store<AppState>, private router: Router) {
+    isLoggedOut$: Observable<boolean>;
 
-  }
 
-  ngOnInit() {
-    this.isLoggedIn$ = this.store
-    .pipe(
-      select(isLoggedIn)
-    );
-    this.isLoggedOut$ = this.store
-    .pipe(
-      select(IsLoggedOut)
-    );
+    constructor(private store: Store<AppState>, private router: Router) {
 
-  }
+    }
 
-  logout() {
-    this.store.dispatch(new Logout());
-  }
+    ngOnInit() {
+
+      this.isLoggedIn$ = this.store
+        .pipe(
+          select(isLoggedIn)
+        );
+
+      this.isLoggedOut$ = this.store
+        .pipe(
+          select(isLoggedOut)
+        );
+
+    }
+
+    logout() {
+
+      this.store.dispatch(new Logout());
+
+    }
+
+
 }
